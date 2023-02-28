@@ -15,7 +15,7 @@
 #include <termios.h>
 #include <fcntl.h>
 #endif
-//constexpr auto ESC = 27;  // Useless
+//constexpr auto ESC = 27;  // Added constexpr // Useless
 using namespace std;
 
 class Watch {
@@ -67,6 +67,7 @@ public:
     void counter(Watch& name) {
         while (!_kbhit()) {
             system("cls");
+            cout << "Для виходу в будь-який момент можете натиснути -> будь-яку клавішу\n"; // Exit any key
             cout << name; name.sec++;
             if (name.sec == 60) {
                 name.min++;
@@ -102,7 +103,7 @@ public:
     void counter(Watch& name) {
         while (!_kbhit()) {
             system("clear");
-            cout << "Для виходу в будь-який момент можете натиснути -> ESC\n";
+            cout << "Для виходу в будь-який момент можете натиснути -> будь-яку клавішу\n"; // Exit any key
             cout << name;
             name.sec++;
             if (name.sec == 60) {
@@ -131,7 +132,7 @@ int main() {
 #endif
 
 #ifdef __linux
-    cout << "Для виходу в будь-який момент можете натиснути -> ESC\n";
+    //cout << "Для виходу в будь-який момент можете натиснути -> будь-яку клавішу\n"; moved to (void counter)
     //this_thread::sleep_for(chrono::seconds(5)); Removed
     watch.counter(watch);
 #endif
